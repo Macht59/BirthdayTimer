@@ -15,10 +15,7 @@ export default class Summary extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({ initialLoading: true });
-        AsyncStorage.getItem("birthDate", this.initializeBirthDate)
-            .then(res => this.setState({ initialLoading: false }))
-            .catch(res => this.setState({ initialLoading: false }));
+        AsyncStorage.getItem("birthDate", this.initializeBirthDate);
     }
 
     render() {
@@ -26,6 +23,7 @@ export default class Summary extends React.Component {
             <Swiper
                 activeDotColor="skyblue"
                 loop={false}
+                index={this.state.swiperIndex}
             >
                 <View style={{ justifyContent: "space-around", flex: 1, paddingBottom: 30 }}>
                     <Text style={[styles.header, styles.text]}>Your birthday will be in:</Text>
@@ -36,16 +34,21 @@ export default class Summary extends React.Component {
                 <View style={{ flex: 1 }} >
                     <Settings dateUpdated={this.updateBirthdate} />
                 </View>
-            </Swiper>);
+            </Swiper>
+        );
     }
 
     initializeBirthDate(error, result) {
         if (!error) {
             this.setState({ birthDate: new Date(Number(result)) });
         }
+        if (!result) {
+            this.setState({ sliderIndex: 1 });
+        }
     }
 
     updateBirthdate(newDate) {
+        console.log("Summary -> updateBirthdate");
         this.setState({ birthDate: newDate });
     }
 }

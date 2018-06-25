@@ -54,7 +54,7 @@ export default class Settings extends React.Component {
 
     openDataPicker() {
         try {
-            const { action, year, month, day } = DatePickerAndroid.open({
+            DatePickerAndroid.open({
                 date: this.state.chosenDate
             }).then(value => {
                 console.debug(value);
