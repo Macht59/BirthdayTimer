@@ -22,14 +22,12 @@ export default class Counter extends Component {
     }
 
     componentDidMount() {
-        console.log("Counter -> componentDidMount");
         if (this.props.birthDate) {
             this.initializeRemainingTime();
         }
     }
 
     componentDidUpdate() {
-        console.log("Counter -> componentDidUpdate");
         if (this.props.birthDate !== this.state.birthDate) {
             this.initializeRemainingTime();
         }
@@ -45,9 +43,12 @@ export default class Counter extends Component {
                 countdownDate: new Date(prevState.countdownDate.getTime() - 1000),
             };
         });
+
+        console.log(JSON.stringify(this.state.countdownDate));
     }
 
     initializeRemainingTime() {
+        console.debug("initializeRemainingTime");
         if (!this.props.birthDate) {
             if (this.state.birthDate || this.state.countdownDate) {
                 this.setState(() => {
@@ -87,10 +88,11 @@ export default class Counter extends Component {
                 alignItems: "center",
                 flex: 1,
             }}>
-                {!this.state.countdownDate && <Text style={styles.circleText}>Swipe right to select date</Text>}
+                {!this.state.countdownDate && <Text style={styles.smallCircleText}>Please, swipe right</Text>}
+                {!this.state.countdownDate && <Text style={styles.smallCircleText}>to select your birthdate</Text>}
                 {this.state.countdownDate && <Text style={styles.circleText}>{this.state.countdownDate.getMonth()} Month</Text>}
-                {this.state.countdownDate && <Text style={styles.circleText}>{this.state.countdownDate.getDate()} Days</Text>}
-                {this.state.countdownDate && <Text style={styles.circleText}>{this.state.countdownDate.getHours()} Hours</Text>}
+                {this.state.countdownDate && <Text style={styles.circleText}>{this.state.countdownDate.getDate() - 1} Days</Text>}
+                {this.state.countdownDate && <Text style={styles.circleText}>{this.state.countdownDate.getHours() - 2} Hours</Text>}
                 {this.state.countdownDate && <Text style={styles.circleText}>{this.state.countdownDate.getMinutes()} Minutes</Text>}
                 {this.state.countdownDate && <Text style={styles.circleText}>{this.state.countdownDate.getSeconds()} Seconds</Text>}
             </View>
@@ -109,6 +111,12 @@ const styles = StyleSheet.create({
     circleText: {
         color: "white",
         fontSize: 40,
+        alignSelf: "center",
+    },
+    smallCircleText: {
+        color: "white",
+        fontSize: 30,
+        alignSelf: "center",
     }
 });
 

@@ -1,8 +1,9 @@
 import React from "react";
-import { AppRegistry, Text, View, StyleSheet, AsyncStorage } from "react-native";
+import { AppRegistry, Text, View, AsyncStorage } from "react-native";
 import Counter from "./Counter";
 import Swiper from "react-native-swiper";
 import Settings from "./Settings";
+import { textStyles } from "../styles/textStyles";
 
 export default class Summary extends React.Component {
 
@@ -12,6 +13,7 @@ export default class Summary extends React.Component {
 
         this.initializeBirthDate = this.initializeBirthDate.bind(this);
         this.updateBirthdate = this.updateBirthdate.bind(this);
+        this.clearBirthdate = this.clearBirthdate.bind(this);
     }
 
     componentDidMount() {
@@ -24,22 +26,22 @@ export default class Summary extends React.Component {
                 activeDotColor="skyblue"
                 loop={false}
                 index={this.state.swiperIndex}
+                style={{ flex: 1, justifyContent: "space-around" }}
             >
-                <View style={{ justifyContent: "space-around", flex: 1, paddingBottom: 30 }}>
-                    <Text style={[styles.header, styles.text]}>Your birthday will be in:</Text>
-                    <Counter
-                        birthDate={this.state.birthDate}
-                    />
+                <View style={{ flex: 1, marginBottom: 20, alignContent: "center", justifyContent: "space-around" }}>
+                    <Text style={[textStyles.text, textStyles.shadow]}>Your birthday will be in:</Text>
+                    <Counter birthDate={this.state.birthDate} />
                 </View>
-                <View style={{ flex: 1 }} >
-                    <Settings dateUpdated={this.updateBirthdate} />
+                <View>
+                    <Settings dateUpdated={this.updateBirthdate} birthDate={this.state.birthDate} />
                 </View>
             </Swiper>
         );
     }
 
     initializeBirthDate(error, result) {
-        if (!error) {
+        console.log(JSON.stringify(result));
+        if (!error && result) {
             this.setState({ birthDate: new Date(Number(result)) });
         }
         if (!result) {
@@ -48,24 +50,12 @@ export default class Summary extends React.Component {
     }
 
     updateBirthdate(newDate) {
-        console.log("Summary -> updateBirthdate");
         this.setState({ birthDate: newDate });
     }
-}
 
-const styles = StyleSheet.create({
-    text: {
-        color: "skyblue",
-        textShadowColor: "rgba(255, 255, 255, 1)",
-        textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 5,
-    },
-    header: {
-        fontSize: 40,
-        padding: 10,
-        paddingTop: 20,
-        textAlign: "center",
-    },
-});
+    clearBirthdate() {
+        this.setState({ birthDate: null });
+    }
+}
 
 AppRegistry.registerComponent("Summary", () => Summary);

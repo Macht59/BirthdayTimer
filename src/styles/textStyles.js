@@ -5,13 +5,11 @@ export const textStyles = StyleSheet.create({
     shadow: {
         textShadowColor: "rgba(255, 255, 255, 1)",
         textShadowOffset: { width: 1, height: 1 },
-        textShadowRadius: 5,
+        textShadowRadius: 10,
     },
-    header: {
+    text: {
         color: "skyblue",
-        fontSize: 40,
-        padding: 10,
-        paddingTop: 20,
+        fontSize: 30,
         textAlign: "center",
     },
 });
