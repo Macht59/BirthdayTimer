@@ -43,22 +43,16 @@ export default class Counter extends Component {
                 countdownDate: new Date(prevState.countdownDate.getTime() - 1000),
             };
         });
-
-        console.log(JSON.stringify(this.state.countdownDate));
     }
 
     initializeRemainingTime() {
-        console.debug("initializeRemainingTime");
         if (!this.props.birthDate) {
-            if (this.state.birthDate || this.state.countdownDate) {
-                this.setState(() => {
-                    return {
-                        countdownDate: null,
-                        birthDate: null,
-                    }
-                })
-            }
-
+            this.setState(() => {
+                return {
+                    countdownDate: null,
+                    birthDate: null,
+                }
+            })
             return;
         }
 
@@ -67,14 +61,12 @@ export default class Counter extends Component {
             diff += 365 * 24 * 60 * 60 * 1000;
         }
 
-        // const seconds = Math.ceil((diff / 1000) % 60) - 1;
-        // const minutes = Math.ceil((diff / (60 * 1000)) % 60) - 1;
-        // const hours = Math.ceil((diff / (60 * 60 * 1000)) % 24) - 1;
-        // const days = Math.ceil((diff / (24 * 60 * 60 * 1000))) - 1;
-
         this.setState(() => {
+            const dateWithTimeShift = new Date(diff);
+            const pureDate = new Date(dateWithTimeShift.getTime() + dateWithTimeShift.getTimezoneOffset() * 60 * 1000);
+
             return {
-                countdownDate: new Date(diff),
+                countdownDate: pureDate,
                 birthDate: this.props.birthDate,
             };
         });
@@ -92,7 +84,7 @@ export default class Counter extends Component {
                 {!this.state.countdownDate && <Text style={styles.smallCircleText}>to select your birthdate</Text>}
                 {this.state.countdownDate && <Text style={styles.circleText}>{this.state.countdownDate.getMonth()} Month</Text>}
                 {this.state.countdownDate && <Text style={styles.circleText}>{this.state.countdownDate.getDate() - 1} Days</Text>}
-                {this.state.countdownDate && <Text style={styles.circleText}>{this.state.countdownDate.getHours() - 2} Hours</Text>}
+                {this.state.countdownDate && <Text style={styles.circleText}>{this.state.countdownDate.getHours()} Hours</Text>}
                 {this.state.countdownDate && <Text style={styles.circleText}>{this.state.countdownDate.getMinutes()} Minutes</Text>}
                 {this.state.countdownDate && <Text style={styles.circleText}>{this.state.countdownDate.getSeconds()} Seconds</Text>}
             </View>

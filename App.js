@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Summary from './src/components/Summary';
 import AdBar from "./src/components/AdBar";
 
@@ -8,7 +8,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Summary />
-        <AdBar />
+        {/* <AdBar /> */}
       </View>
     );
   }

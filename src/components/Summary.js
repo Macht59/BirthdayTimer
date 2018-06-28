@@ -1,9 +1,10 @@
 import React from "react";
-import { AppRegistry, Text, View, AsyncStorage } from "react-native";
+import { AppRegistry, Text, View, AsyncStorage, StyleSheet } from "react-native";
 import Counter from "./Counter";
 import Swiper from "react-native-swiper";
 import Settings from "./Settings";
 import { textStyles } from "../styles/textStyles";
+import { BIRTHDAY_STORE_KEY } from "../common/constants";
 
 export default class Summary extends React.Component {
 
@@ -13,11 +14,10 @@ export default class Summary extends React.Component {
 
         this.initializeBirthDate = this.initializeBirthDate.bind(this);
         this.updateBirthdate = this.updateBirthdate.bind(this);
-        this.clearBirthdate = this.clearBirthdate.bind(this);
     }
 
     componentDidMount() {
-        AsyncStorage.getItem("birthDate", this.initializeBirthDate);
+        AsyncStorage.getItem(BIRTHDAY_STORE_KEY, this.initializeBirthDate);
     }
 
     render() {
@@ -25,14 +25,15 @@ export default class Summary extends React.Component {
             <Swiper
                 activeDotColor="skyblue"
                 loop={false}
-                index={this.state.swiperIndex}
+                // index={this.state.swiperIndex}
+                index={1}
                 style={{ flex: 1, justifyContent: "space-around" }}
             >
-                <View style={{ flex: 1, marginBottom: 20, alignContent: "center", justifyContent: "space-around" }}>
+                <View style={styles.slideContainer}>
                     <Text style={[textStyles.text, textStyles.shadow]}>Your birthday will be in:</Text>
                     <Counter birthDate={this.state.birthDate} />
                 </View>
-                <View>
+                <View style={styles.slideContainer}>
                     <Settings dateUpdated={this.updateBirthdate} birthDate={this.state.birthDate} />
                 </View>
             </Swiper>
@@ -52,10 +53,15 @@ export default class Summary extends React.Component {
     updateBirthdate(newDate) {
         this.setState({ birthDate: newDate });
     }
-
-    clearBirthdate() {
-        this.setState({ birthDate: null });
-    }
 }
+
+const styles = StyleSheet.create({
+    slideContainer: {
+        flex: 1,
+        marginBottom: 20,
+        alignContent: "center",
+        justifyContent: "space-around",
+    },
+});
 
 AppRegistry.registerComponent("Summary", () => Summary);
