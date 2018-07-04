@@ -25,8 +25,7 @@ export default class Summary extends React.Component {
             <Swiper
                 activeDotColor="skyblue"
                 loop={false}
-                // index={this.state.swiperIndex}
-                index={1}
+                index={this.state.swiperIndex}
                 style={{ flex: 1, justifyContent: "space-around" }}
             >
                 <View style={styles.slideContainer}>
