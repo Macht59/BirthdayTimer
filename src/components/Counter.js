@@ -47,7 +47,7 @@ export default class Counter extends Component {
                 {this.state.timer.countdownDate.isInitialized && <Text style={styles.circleText}>{this.state.timer.countdownDate.minutes} Minutes</Text>}
                 {this.state.timer.countdownDate.isInitialized && <Text style={styles.circleText}>{this.state.timer.countdownDate.seconds} Seconds</Text>}
             </View>
-        </View>); 
+        </View>);
     }
 }
 
