@@ -7,6 +7,7 @@ import {
     Dimensions,
 } from 'react-native';
 import BirthdayTimer from '../common/BirthdayTimer';
+import { textStyles } from "../styles/textStyles";
 
 export default class Counter extends Component {
 
@@ -38,43 +39,69 @@ export default class Counter extends Component {
     }
 
     render() {
-        return (<View style={styles.circle}>
-            <View style={styles.circleTextContainer}>
-                {!this.state.timer.countdownDate.isInitialized && <Text style={styles.smallCircleText}>Please, swipe right</Text>}
-                {!this.state.timer.countdownDate.isInitialized && <Text style={styles.smallCircleText}>to select your birthdate</Text>}
-                {this.state.timer.countdownDate.isInitialized && <Text style={styles.circleText}>{this.state.timer.countdownDate.days} Days</Text>}
-                {this.state.timer.countdownDate.isInitialized && <Text style={styles.circleText}>{this.state.timer.countdownDate.hours} Hours</Text>}
-                {this.state.timer.countdownDate.isInitialized && <Text style={styles.circleText}>{this.state.timer.countdownDate.minutes} Minutes</Text>}
-                {this.state.timer.countdownDate.isInitialized && <Text style={styles.circleText}>{this.state.timer.countdownDate.seconds} Seconds</Text>}
+        const isInitialized = this.state.timer.countdownDate.isInitialized;
+        return (<View style={styles.container}>
+            <Text style={[textStyles.text, textStyles.shadow, textStyles.screenHeader]}>
+                Your birthday will be in:
+            </Text>
+            <View style={styles.circleContainer}>
+                <View style={styles.circle}>
+                    {!isInitialized && <Text
+                        allowFontScaling={false}
+                        style={styles.smallCircleText}>Please, swipe right to select your birthdate
+                    </Text>}
+                    {isInitialized && <Text
+                        allowFontScaling={false}
+                        style={styles.circleText}>{this.state.timer.countdownDate.days} Days
+                    </Text>}
+                    {isInitialized && <Text
+                        allowFontScaling={false}
+                        style={styles.circleText}>
+                        {this.state.timer.countdownDate.hours} Hours
+                    </Text>}
+                    {isInitialized && <Text
+                        allowFontScaling={false}
+                        style={styles.circleText}>
+                        {this.state.timer.countdownDate.minutes} Minutes
+                    </Text>}
+                    {isInitialized && <Text
+                        allowFontScaling={false}
+                        style={styles.circleText}>
+                        {this.state.timer.countdownDate.seconds} Seconds
+                    </Text>}
+                </View>
             </View>
         </View>);
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "center",
+    },
+    circleContainer: {
+        flex: 1,
+        justifyContent: "center",
+    },
     circle: {
         backgroundColor: 'skyblue',
         borderRadius: (Dimensions.get("window").width - 30) / 2,
         width: Dimensions.get("window").width - 30,
         height: Dimensions.get("window").width - 30,
-        alignSelf: "center",
-    },
-    circleTextContainer: {
-        flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
-        flex: 1,
+        justifyContent: "center",
     },
     circleText: {
         color: "white",
         fontSize: 40,
-        alignSelf: "center",
+        textAlign: "center",
     },
     smallCircleText: {
         color: "white",
         fontSize: 30,
-        alignSelf: "center",
-    }
+        textAlign: "center",
+    },
 });
 
 AppRegistry.registerComponent('Counter', () => Counter);

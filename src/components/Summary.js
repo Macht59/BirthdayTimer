@@ -1,23 +1,18 @@
 import React from "react";
-import { AppRegistry, Text, View, AsyncStorage, StyleSheet } from "react-native";
+import { AppRegistry, View, StyleSheet } from "react-native";
 import Counter from "./Counter";
 import Swiper from "react-native-swiper";
 import Settings from "./Settings";
-import { textStyles } from "../styles/textStyles";
-import { BIRTHDAY_STORE_KEY } from "../common/constants";
 
 export default class Summary extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { birthDate: null };
+        this.state = {
+            birthDate: this.props.birthDate, 
+        };
 
-        this.initializeBirthDate = this.initializeBirthDate.bind(this);
         this.updateBirthdate = this.updateBirthdate.bind(this);
-    }
-
-    componentDidMount() {
-        AsyncStorage.getItem(BIRTHDAY_STORE_KEY, this.initializeBirthDate);
     }
 
     render() {
@@ -25,11 +20,8 @@ export default class Summary extends React.Component {
             <Swiper
                 activeDotColor="skyblue"
                 loop={false}
-                index={this.state.swiperIndex}
-                style={{ justifyContent: "space-around" }}
             >
                 <View style={styles.slideContainer}>
-                    <Text style={[textStyles.text, textStyles.shadow]}>Your birthday will be in:</Text>
                     <Counter birthDate={this.state.birthDate} />
                 </View>
                 <View style={styles.slideContainer}>
@@ -37,16 +29,6 @@ export default class Summary extends React.Component {
                 </View>
             </Swiper>
         );
-    }
-
-    initializeBirthDate(error, result) {
-        console.log(JSON.stringify(result));
-        if (!error && result) {
-            this.setState({ birthDate: new Date(Number(result)) });
-        }
-        if (!result) {
-            this.setState({ sliderIndex: 1 });
-        }
     }
 
     updateBirthdate(newDate) {
@@ -57,9 +39,10 @@ export default class Summary extends React.Component {
 const styles = StyleSheet.create({
     slideContainer: {
         flex: 1,
-        marginBottom: 20,
         alignContent: "center",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
+        marginBottom: 50,
+        marginTop: 24,
     },
 });
 
