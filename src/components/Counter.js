@@ -8,6 +8,9 @@ import {
 } from 'react-native';
 import BirthdayTimer from '../common/BirthdayTimer';
 import { textStyles } from "../styles/textStyles";
+import { DangerZone } from 'expo';
+import { localization } from '../assets/counter.localization';
+const { Localization } = DangerZone;
 
 export default class Counter extends Component {
 
@@ -17,6 +20,7 @@ export default class Counter extends Component {
         this.state = {
             timer: new BirthdayTimer(),
         };
+        this.localeStore = new Localization.LocaleStore(localization);
 
         setInterval(this.updateRemainingTime, 1000);
     }
@@ -42,13 +46,13 @@ export default class Counter extends Component {
         const isInitialized = this.state.timer.countdownDate.isInitialized;
         return (<View style={styles.container}>
             <Text style={[textStyles.text, textStyles.shadow, textStyles.screenHeader]}>
-                Your birthday will be in:
+                {this.localeStore.yourBirthdayWillBeIn}
             </Text>
             <View style={styles.circleContainer}>
                 <View style={styles.circle}>
                     {!isInitialized && <Text
                         allowFontScaling={false}
-                        style={styles.smallCircleText}>Please, swipe right to select your birthdate
+                        style={styles.smallCircleText}>{this.localeStore.pleaseSwipeRightToSelectBirthDate}
                     </Text>}
                     {isInitialized && <Text
                         allowFontScaling={false}

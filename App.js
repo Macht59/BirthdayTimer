@@ -5,6 +5,7 @@ import {
   AsyncStorage,
 } from 'react-native';
 import Summary from './src/components/Summary';
+import LocalizationScreen from './src/components/Localization';
 import { AppLoading } from 'expo';
 import { BIRTHDAY_STORE_KEY } from "./src/common/constants";
 
@@ -36,6 +37,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Summary birthDate={this.state.birthDate} />
+        {/* <LocalizationScreen /> */}
       </View>
     );
   }
