@@ -9,7 +9,7 @@ import {
 import BirthdayTimer from '../common/BirthdayTimer';
 import { textStyles } from "../styles/textStyles";
 import { DangerZone } from 'expo';
-import { localization } from '../assets/counter.localization';
+import { localization } from './counter.localization';
 const { Localization } = DangerZone;
 
 export default class Counter extends Component {
@@ -56,22 +56,22 @@ export default class Counter extends Component {
                     </Text>}
                     {isInitialized && <Text
                         allowFontScaling={false}
-                        style={styles.circleText}>{this.state.timer.countdownDate.days} Days
+                        style={styles.circleText}>{this.state.timer.countdownDate.days} {this.localeStore.days}
                     </Text>}
                     {isInitialized && <Text
                         allowFontScaling={false}
                         style={styles.circleText}>
-                        {this.state.timer.countdownDate.hours} Hours
+                        {this.state.timer.countdownDate.hours} {this.localeStore.hours}
                     </Text>}
                     {isInitialized && <Text
                         allowFontScaling={false}
                         style={styles.circleText}>
-                        {this.state.timer.countdownDate.minutes} Minutes
+                        {this.state.timer.countdownDate.minutes} {this.localeStore.minutes}
                     </Text>}
                     {isInitialized && <Text
                         allowFontScaling={false}
                         style={styles.circleText}>
-                        {this.state.timer.countdownDate.seconds} Seconds
+                        {this.state.timer.countdownDate.seconds} {this.localeStore.seconds}
                     </Text>}
                 </View>
             </View>
