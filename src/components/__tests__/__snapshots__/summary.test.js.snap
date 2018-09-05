@@ -1,0 +1,332 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Summary component renders correctly 1`] = `
+<View
+  onLayout={[Function]}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "transparent",
+        "flex": 1,
+        "position": "relative",
+      },
+      undefined,
+    ]
+  }
+>
+  <RCTScrollView
+    activeDotColor="skyblue"
+    automaticallyAdjustContentInsets={false}
+    autoplay={false}
+    autoplayDirection={true}
+    autoplayTimeout={2.5}
+    bounces={false}
+    contentContainerStyle={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+        },
+        undefined,
+      ]
+    }
+    contentOffset={
+      Object {
+        "x": 0,
+      }
+    }
+    disableNextButton={false}
+    horizontal={true}
+    index={0}
+    loadMinimal={false}
+    loadMinimalSize={1}
+    loop={false}
+    onIndexChanged={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    pagingEnabled={true}
+    removeClippedSubviews={true}
+    scrollsToTop={false}
+    showsButtons={false}
+    showsHorizontalScrollIndicator={false}
+    showsPagination={true}
+    showsVerticalScrollIndicator={false}
+  >
+    <View>
+      <View
+        style={
+          Array [
+            Object {
+              "height": 1334,
+              "width": 750,
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignContent": "center",
+              "flex": 1,
+              "justifyContent": "space-between",
+              "marginBottom": 50,
+              "marginTop": 24,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "skyblue",
+                    "fontSize": 30,
+                    "textAlign": "center",
+                  },
+                  Object {
+                    "textShadowColor": "rgba(255, 255, 255, 2)",
+                    "textShadowOffset": Object {
+                      "height": 1,
+                      "width": 1,
+                    },
+                    "textShadowRadius": 20,
+                  },
+                  Object {
+                    "paddingBottom": 25,
+                    "paddingTop": 25,
+                    "textAlign": "center",
+                  },
+                ]
+              }
+            >
+              Your birthday will be in:
+            </Text>
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "skyblue",
+                    "borderRadius": 360,
+                    "height": 720,
+                    "justifyContent": "center",
+                    "width": 720,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={false}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "white",
+                      "fontSize": 30,
+                      "textAlign": "center",
+                    }
+                  }
+                >
+                  Please, swipe right to select your birthdate
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "height": 1334,
+              "width": 750,
+            },
+            Object {
+              "backgroundColor": "transparent",
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignContent": "center",
+              "flex": 1,
+              "justifyContent": "space-between",
+              "marginBottom": 50,
+              "marginTop": 24,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "flex": 1,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "skyblue",
+                    "fontSize": 30,
+                    "textAlign": "center",
+                  },
+                  Object {
+                    "textShadowColor": "rgba(255, 255, 255, 2)",
+                    "textShadowOffset": Object {
+                      "height": 1,
+                      "width": 1,
+                    },
+                    "textShadowRadius": 20,
+                  },
+                  Object {
+                    "paddingBottom": 25,
+                    "paddingTop": 25,
+                    "textAlign": "center",
+                  },
+                ]
+              }
+            >
+              Your birthdate is:
+            </Text>
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                  "justifyContent": "space-around",
+                }
+              }
+            >
+              <View>
+                <RCTDatePicker
+                  date={159159159}
+                  mode="date"
+                  onChange={[Function]}
+                  onResponderTerminationRequest={[Function]}
+                  onStartShouldSetResponder={[Function]}
+                  style={
+                    Object {
+                      "height": 216,
+                    }
+                  }
+                />
+              </View>
+              <View
+                accessible={true}
+                isTVSelectable={true}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "backgroundColor": "#0984e3",
+                    "opacity": 0.9,
+                    "padding": 10,
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Object {
+                      "color": "#FFF",
+                      "fontSize": 20,
+                      "fontWeight": "700",
+                      "textAlign": "center",
+                    }
+                  }
+                >
+                  Save my birthday!
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+  <View
+    pointerEvents="none"
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "transparent",
+          "bottom": 25,
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+        },
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "skyblue",
+            "borderRadius": 4,
+            "height": 8,
+            "marginBottom": 3,
+            "marginLeft": 3,
+            "marginRight": 3,
+            "marginTop": 3,
+            "width": 8,
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "rgba(0,0,0,.2)",
+            "borderRadius": 4,
+            "height": 8,
+            "marginBottom": 3,
+            "marginLeft": 3,
+            "marginRight": 3,
+            "marginTop": 3,
+            "width": 8,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</View>
+`;

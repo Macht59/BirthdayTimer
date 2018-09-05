@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Settings component renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": "skyblue",
+          "fontSize": 30,
+          "textAlign": "center",
+        },
+        Object {
+          "textShadowColor": "rgba(255, 255, 255, 2)",
+          "textShadowOffset": Object {
+            "height": 1,
+            "width": 1,
+          },
+          "textShadowRadius": 20,
+        },
+        Object {
+          "paddingBottom": 25,
+          "paddingTop": 25,
+          "textAlign": "center",
+        },
+      ]
+    }
+  >
+    Your birthdate is:
+  </Text>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "justifyContent": "space-around",
+      }
+    }
+  >
+    <View>
+      <RCTDatePicker
+        date={151515}
+        mode="date"
+        onChange={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": 216,
+          }
+        }
+      />
+    </View>
+    <View
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#0984e3",
+          "opacity": 0.9,
+          "padding": 10,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#FFF",
+            "fontSize": 20,
+            "fontWeight": "700",
+            "textAlign": "center",
+          }
+        }
+      >
+        Save my birthday!
+      </Text>
+    </View>
+  </View>
+</View>
+`;

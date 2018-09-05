@@ -1,9 +1,8 @@
 import React from 'react';
-import 'react-native'
-import AdBar from '../AdBar';
+import AdBar from '../adBar';
 import renderer from 'react-test-renderer';
 
-test('renders without crashing', () => {
+test('AnBar component renders correctly', () => {
     const rendered = renderer.create(<AdBar />).toJSON();
     expect(rendered).toMatchSnapshot();
 });

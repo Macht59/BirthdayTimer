@@ -4,11 +4,14 @@ import {
     AppRegistry, View,
     DatePickerIOS, Text, AsyncStorage,
     Alert, DatePickerAndroid, Platform,
-    TouchableOpacity, StyleSheet
+    StyleSheet
 } from "react-native";
 import { textStyles } from "../styles/textStyles";
 import { BIRTHDAY_STORE_KEY } from "../common/constants";
 import Button from "../components/controls/Button";
+import { DangerZone } from 'expo';
+import { localization } from './settings.localization';
+const { Localization } = DangerZone;
 
 export default class Settings extends React.Component {
 
@@ -20,6 +23,7 @@ export default class Settings extends React.Component {
         this.openAndroidDataPicker = this.openAndroidDataPicker.bind(this);
 
         this.state = { chosenDate: null };
+        this.localeStore = new Localization.LocaleStore(localization);
     }
 
     get birthDate() {
@@ -32,11 +36,11 @@ export default class Settings extends React.Component {
         return (<View style={styles.container}>
             {!this.birthDate && <Text
                 style={[textStyles.text, textStyles.shadow, textStyles.screenHeader]}>
-                Please, set your birthdate
+                {this.localeStore.setYourBirthdate}
             </Text>}
             {this.birthDate && <Text
                 style={[textStyles.text, textStyles.shadow, textStyles.screenHeader]}>
-                Your birthdate is:
+                {this.localeStore.yourBirthdateIs}
             </Text>}
             {Platform.OS === "android"
                 ? this.renderAndroidSettings()
@@ -52,7 +56,7 @@ export default class Settings extends React.Component {
                     onDateChange={this.iOsSetDate}
                     mode="date"
                 />
-                <Button onPress={this.iOsSaveDate} title="Save my birthday!" />
+                <Button onPress={this.iOsSaveDate} title={this.localeStore.saveBirthdate} />
             </View>
         );
     }
@@ -65,7 +69,7 @@ export default class Settings extends React.Component {
                         {this.birthDate.toLocaleDateString()}
                     </Text>}
                 {!this.birthDate &&
-                    <Button onPress={this.openAndroidDataPicker} title="Set my birthday!" />}
+                    <Button onPress={this.openAndroidDataPicker} title={this.localeStore.setMyBirthdate} />}
             </View>
         );
     }
@@ -80,7 +84,7 @@ export default class Settings extends React.Component {
             this.props.dateUpdated(this.birthDate);
         }
 
-        Alert.alert("Your birthdate has been saved!")
+        Alert.alert(this.localeStore.yourBirthdateSaved);
     }
 
     openAndroidDataPicker() {
