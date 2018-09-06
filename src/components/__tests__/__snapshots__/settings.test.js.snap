@@ -35,7 +35,7 @@ exports[`Settings component renders correctly 1`] = `
       ]
     }
   >
-    Your birthdate is:
+    Your birthday:
   </Text>
   <View
     style={
