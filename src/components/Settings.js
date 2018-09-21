@@ -55,7 +55,7 @@ export default class Settings extends React.Component {
                     date={this.birthDate}
                     onDateChange={this.iOsSetDate}
                     mode="date"
-                    maximumDate={new Date()}
+                    maximumDate={this.props.maximumAllowedDate}
                 />
                 <Button onPress={this.iOsSaveDate} title={this.localeStore.saveBirthdate} />
             </View>
@@ -92,7 +92,7 @@ export default class Settings extends React.Component {
         try {
             DatePickerAndroid.open({
                 date: this.birthDate ? this.birthDate : new Date(),
-                maxDate: new Date(),
+                maxDate: this.props.maximumAllowedDate,
             }).then(value => {
                 if (value.action !== DatePickerAndroid.dismissedAction) {
                     const chosenDate = new Date(value.year, value.month, value.day);

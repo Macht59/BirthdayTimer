@@ -224,6 +224,7 @@ exports[`Summary component renders correctly 1`] = `
               <View>
                 <RCTDatePicker
                   date={159159159}
+                  maximumDate={55555555}
                   mode="date"
                   onChange={[Function]}
                   onResponderTerminationRequest={[Function]}

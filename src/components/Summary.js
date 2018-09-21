@@ -25,7 +25,7 @@ export default class Summary extends React.Component {
                     <Counter birthDate={this.state.birthDate} />
                 </View>
                 <View style={styles.slideContainer}>
-                    <Settings dateUpdated={this.updateBirthdate} birthDate={this.state.birthDate} />
+                    <Settings dateUpdated={this.updateBirthdate} birthDate={this.state.birthDate} maximumAllowedDate={this.props.maximumAllowedDate} />
                 </View>
             </Swiper>
         );

@@ -4,6 +4,7 @@ import renderer from 'react-test-renderer';
 
 test('Summary component renders correctly', () => {
     const birthDate = new Date(159159159);
-    const rendered = renderer.create(<Summary birthDate={birthDate} />).toJSON();
+    const maximumAllowedDate = new Date(55555555);
+    const rendered = renderer.create(<Summary birthDate={birthDate} maximumAllowedDate={maximumAllowedDate} />).toJSON();
     expect(rendered).toMatchSnapshot();
 });
