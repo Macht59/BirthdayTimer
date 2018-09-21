@@ -1,8 +1,8 @@
 import React from "react";
 import { AppRegistry, View, StyleSheet } from "react-native";
-import Counter from "./counter";
+import Counter from "./counter.component";
 import Swiper from "react-native-swiper";
-import Settings from "./settings";
+import Settings from "./settings.component";
 
 export default class Summary extends React.Component {
 

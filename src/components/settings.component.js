@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { textStyles } from "../styles/textStyles";
 import { BIRTHDAY_STORE_KEY } from "../common/constants";
-import Button from "../components/controls/Button";
+import Button from "./controls/button.control";
 import { DangerZone } from 'expo';
 import { localization } from './settings.localization';
 const { Localization } = DangerZone;

@@ -4,7 +4,7 @@ import {
   View,
   AsyncStorage,
 } from 'react-native';
-import Summary from './src/components/summary';
+import Summary from './src/components/summary.component';
 import { AppLoading } from 'expo';
 import { BIRTHDAY_STORE_KEY } from "./src/common/constants";
 
