@@ -10,6 +10,7 @@ import BirthdayTimer from '../common/BirthdayTimer';
 import { textStyles } from "../styles/textStyles";
 import { DangerZone } from 'expo';
 import { localization } from './counter.localization';
+import resolveLocale from '../common/Localization';
 const { Localization } = DangerZone;
 
 export default class Counter extends Component {
@@ -25,7 +26,13 @@ export default class Counter extends Component {
         setInterval(this.updateRemainingTime, 1000);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        const currentLocale = await Localization.getCurrentLocaleAsync();
+        const newLocale = resolveLocale(currentLocale);
+        if (newLocale !== currentLocale) {
+            this.localeStore.setLocale(newLocale);
+        }
+
         this.state.timer.initialize(this.props.birthDate);
     }
 
@@ -48,6 +55,7 @@ export default class Counter extends Component {
             <Text style={[textStyles.text, textStyles.shadow, textStyles.screenHeader]}>
                 {this.localeStore.yourBirthdayWillBeIn}
             </Text>
+            <Text>{this.state.currentLocale}</Text>
             <View style={styles.circleContainer}>
                 <View style={styles.circle}>
                     {!isInitialized && <Text

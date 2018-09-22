@@ -11,6 +11,7 @@ import { BIRTHDAY_STORE_KEY } from "../common/constants";
 import Button from "./controls/button.control";
 import { DangerZone } from 'expo';
 import { localization } from './settings.localization';
+import resolveLocale from '../common/Localization';
 const { Localization } = DangerZone;
 
 export default class Settings extends React.Component {
@@ -30,6 +31,14 @@ export default class Settings extends React.Component {
         return this.state.chosenDate
             ? this.state.chosenDate
             : this.props.birthDate ? this.props.birthDate : new Date();
+    }
+
+    async componentDidMount() {
+        const currentLocale = await Localization.getCurrentLocaleAsync();
+        const newLocale = resolveLocale(currentLocale);
+        if (newLocale !== currentLocale) {
+            this.localeStore.setLocale(newLocale);
+        }
     }
 
     render() {

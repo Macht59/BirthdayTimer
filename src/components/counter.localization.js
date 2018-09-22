@@ -15,7 +15,7 @@ export const localization = {
         minutes: "минут",
         seconds: "секунд",
     },
-    ua_UK: {
+    uk_UA: {
         yourBirthdayWillBeIn: "Ваш День Народження настане через:",
         pleaseSwipeRightToSelectBirthDate: "Будь ласка, спайпніть вправо щоб обрати Ваш День Народження",
         days: "днів",

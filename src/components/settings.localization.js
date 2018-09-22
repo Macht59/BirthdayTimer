@@ -13,7 +13,7 @@ export const localization = {
         setMyBirthdate: "Установить",
         yourBirthdateSaved: "Ваш День Рождения сохранен",
     },
-    ua_UK: {
+    uk_UA: {
         setYourBirthdate: "Будь ласка, оберіть Ваш День Народження",
         yourBirthdateIs: "Ваш День Народження:",
         saveBirthdate: "Зберегти",
