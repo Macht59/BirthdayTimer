@@ -3,13 +3,14 @@ import { AppRegistry, View, StyleSheet } from "react-native";
 import Counter from "./counter.component";
 import Swiper from "react-native-swiper";
 import Settings from "./settings.component";
+import AdBar from "./adBar.component";
 
 export default class Summary extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            birthDate: this.props.birthDate, 
+            birthDate: this.props.birthDate,
         };
 
         this.updateBirthdate = this.updateBirthdate.bind(this);
@@ -23,6 +24,7 @@ export default class Summary extends React.Component {
             >
                 <View style={styles.slideContainer}>
                     <Counter birthDate={this.state.birthDate} />
+                    <AdBar />
                 </View>
                 <View style={styles.slideContainer}>
                     <Settings dateUpdated={this.updateBirthdate} birthDate={this.state.birthDate} maximumAllowedDate={this.props.maximumAllowedDate} />

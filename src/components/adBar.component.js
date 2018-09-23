@@ -1,26 +1,29 @@
 import React from "react";
 import { View, AppRegistry } from "react-native";
+import {
+  AdMobBanner,
+} from 'expo';
 
 export default class AdBar extends React.Component {
-  
+
   render() {
     return (
       <View>
-        {/* <AdMobBanner
-          adSize="banner"
+        <AdMobBanner
+          bannerSize="banner"
           adUnitID="ca-app-pub-7409231048157456/4292105638"
-          ref={el => (this._basicExample = el)}
+          testDeviceID="EMULATOR"
+          onDidFailToReceiveAdWithError={this.bannerError}
           style={{ alignSelf: "center" }}
-          onAdFailedToLoad={this.onAdFailedToLoad}
-        /> */}
+        />
       </View>
     );
   }
 
-  onAdFailedToLoad() {
-    console.log("AdMob bar failed to load.");
+  bannerError(arg) {
+    console.warn("banner failed to load");
   }
-  
+
 }
 
 AppRegistry.registerComponent("AdBar", () => AdBar);

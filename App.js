@@ -32,7 +32,6 @@ export default class App extends React.Component {
       );
     }
 
-
     return (
       <View style={styles.container}>
         <Summary birthDate={this.state.birthDate} maximumAllowedDate={new Date()} />

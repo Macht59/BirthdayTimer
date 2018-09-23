@@ -156,6 +156,24 @@ exports[`Summary component renders correctly 1`] = `
               </View>
             </View>
           </View>
+          <View>
+            <View
+              style={
+                Object {
+                  "alignSelf": "center",
+                }
+              }
+            >
+              <RNAdMob
+                adUnitID="ca-app-pub-7409231048157456/4292105638"
+                bannerSize="banner"
+                onDidFailToReceiveAdWithError={[Function]}
+                onSizeChange={[Function]}
+                style={Object {}}
+                testDeviceID="EMULATOR"
+              />
+            </View>
+          </View>
         </View>
       </View>
       <View
