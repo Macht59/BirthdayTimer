@@ -1,5 +1,5 @@
 import React from 'react';
-import Settings from '../settings';
+import Settings from '../settings.component';
 import renderer from 'react-test-renderer';
 
 test('Settings component renders correctly', () => {

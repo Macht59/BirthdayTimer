@@ -114,6 +114,11 @@ exports[`Summary component renders correctly 1`] = `
             >
               Your birthday will be in:
             </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+            />
             <View
               style={
                 Object {

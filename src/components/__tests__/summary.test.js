@@ -1,5 +1,5 @@
 import React from 'react';
-import Summary from '../summary';
+import Summary from '../summary.component';
 import renderer from 'react-test-renderer';
 
 test('Summary component renders correctly', () => {

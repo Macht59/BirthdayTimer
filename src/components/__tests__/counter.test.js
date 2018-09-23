@@ -1,5 +1,5 @@
 import React from 'react';
-import Counter from '../counter';
+import Counter from '../counter.component';
 import renderer from 'react-test-renderer';
 
 test('Counter component renders correctly', () => {
