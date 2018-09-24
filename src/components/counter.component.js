@@ -52,7 +52,10 @@ export default class Counter extends Component {
     render() {
         const isInitialized = this.state.timer.countdownDate.isInitialized;
         return (<View style={styles.container}>
-            <Text style={[textStyles.text, textStyles.shadow, textStyles.screenHeader]}>
+            <Text
+                allowFontScaling={false}
+                style={[textStyles.text, textStyles.shadow, textStyles.screenHeader]}
+            >
                 {this.localeStore.yourBirthdayWillBeIn}
             </Text>
             <Text>{this.state.currentLocale}</Text>
@@ -98,9 +101,9 @@ const styles = StyleSheet.create({
     },
     circle: {
         backgroundColor: 'skyblue',
-        borderRadius: (Dimensions.get("window").width - 30) / 2,
-        width: Dimensions.get("window").width - 30,
-        height: Dimensions.get("window").width - 30,
+        borderRadius: (Dimensions.get("window").width - 50) / 2,
+        width: Dimensions.get("window").width - 50,
+        height: Dimensions.get("window").width - 50,
         alignItems: "center",
         justifyContent: "center",
     },
