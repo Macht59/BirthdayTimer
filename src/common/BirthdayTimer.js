@@ -1,9 +1,25 @@
 import CountDownDate from "./CountDownDate";
 
 export default class BirthdayTimer {
+
     constructor() {
         this.birthDate = null;
         this.countdownDate = new CountDownDate();
+    }
+
+    get nextAge() {
+        if (!this.birthDate) {
+            return;
+        }
+
+        const todayDate = new Date().setFullYear(1);
+        const birthDate = this.birthDate.setFullYear(1);
+
+        if (todayDate <= birthDate) {
+            return this.birthDate.getFullYear() - (new Date()).getFullYear();
+        }
+
+        return this
     }
 
     initialize(birthDate, nowDate) {
