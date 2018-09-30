@@ -11,7 +11,7 @@ exports[`Counter component renders correctly 1`] = `
 >
   <Text
     accessible={true}
-    allowFontScaling={true}
+    allowFontScaling={false}
     ellipsizeMode="tail"
     style={
       Array [
@@ -56,10 +56,10 @@ exports[`Counter component renders correctly 1`] = `
         Object {
           "alignItems": "center",
           "backgroundColor": "skyblue",
-          "borderRadius": 360,
-          "height": 720,
+          "borderRadius": 350,
+          "height": 700,
           "justifyContent": "center",
-          "width": 720,
+          "width": 700,
         }
       }
     >
