@@ -51,3 +51,19 @@ it("timer has correct nexAge when birthday will be next year", () => {
     t.initialize(new Date(1990, 10, 29));
     expect(t.nextAge).toBe(28);
 });
+
+it("timer has correct nexAge for 0 year old user. BD next year", () => {
+    global.Date.now = jest.fn(() => new Date(2018, 10, 14).getTime());
+
+    const t = new BirthdayTimer();
+    t.initialize(new Date(2017, 10, 10));
+    expect(t.nextAge).toBe(2);
+});
+
+it("timer has correct nexAge for 0 year old user. BD next year", () => {
+    global.Date.now = jest.fn(() => new Date(2018, 10, 14).getTime());
+
+    const t = new BirthdayTimer();
+    t.initialize(new Date(2017, 10, 20));
+    expect(t.nextAge).toBe(1);
+});

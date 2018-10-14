@@ -19,7 +19,7 @@ export default class BirthdayTimer {
             return (new Date(Date.now())).getFullYear() - this.birthDate.getFullYear();
         }
 
-        return (new Date(Date.now())).getFullYear() - 1 - this.birthDate.getFullYear();
+        return (new Date(Date.now())).getFullYear() + 1 - this.birthDate.getFullYear();
     }
 
     initialize(birthDate, nowDate) {

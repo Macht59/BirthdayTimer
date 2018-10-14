@@ -4,7 +4,8 @@
     "sdkVersion": "27.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
-    "version": "1.0.1",
+    "version": "1.1.1",
+    "privacy": "public",
     "splash": {
       "backgroundColor": "#e0f3ff"
     },
@@ -13,7 +14,7 @@
       "bundleIdentifier": "com.istarodynov.birthdaytimer"
     },
     "android": {
-      "versionCode": 3,
+      "versionCode": 6,
       "package": "com.istarodynov.birthdaytimer",
       "permissions": [],
       "adaptiveIcon": {
