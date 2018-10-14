@@ -3,12 +3,12 @@ pipeline {
   stages {
     stage('Install packages') {
       steps {
-        sh 'npm install'
+        bat 'npm install'
       }
     }
     stage('Run tests') {
       steps {
-        sh 'npm test --colors'
+        bat 'npm test --colors'
       }
     }
     stage('Collect test results') {
