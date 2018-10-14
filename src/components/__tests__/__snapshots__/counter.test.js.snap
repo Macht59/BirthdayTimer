@@ -48,11 +48,6 @@ exports[`Counter component renders correctly 1`] = `
      
     years old in
   </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-  />
   <View
     style={
       Object {
@@ -88,6 +83,49 @@ exports[`Counter component renders correctly 1`] = `
         Please, swipe right to select your birthdate
       </Text>
     </View>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "center",
+        "alignItems": "center",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "paddingBottom": 15,
+      }
+    }
+  >
+    <RCTSwitch
+      disabled={false}
+      onChange={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      onValueChange={[Function]}
+      style={
+        Array [
+          Object {
+            "height": 31,
+            "width": 51,
+          },
+          undefined,
+        ]
+      }
+      value={false}
+    />
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "skyblue",
+          "fontSize": 15,
+          "paddingLeft": 15,
+        }
+      }
+    >
+      do not dim
+    </Text>
   </View>
 </View>
 `;
