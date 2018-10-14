@@ -10,12 +10,11 @@ exports[`AnBar component renders correctly 1`] = `
     }
   >
     <RNAdMob
-      adUnitID="ca-app-pub-7409231048157456/4292105638"
+      adUnitID="ca-app-pub-7409231048157456/8013801446"
       bannerSize="banner"
       onDidFailToReceiveAdWithError={[Function]}
       onSizeChange={[Function]}
       style={Object {}}
-      testDeviceID="EMULATOR"
     />
   </View>
 </View>

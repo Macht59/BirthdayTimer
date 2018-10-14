@@ -9,17 +9,17 @@ export default class BirthdayTimer {
 
     get nextAge() {
         if (!this.birthDate) {
-            return;
+            return 0;
         }
 
-        const todayDate = new Date().setFullYear(1);
-        const birthDate = this.birthDate.setFullYear(1);
+        const nowDateOnly = new Date(Date.now()).setFullYear(1);
+        const birthDateOnly = new Date(this.birthDate.getTime()).setFullYear(1);
 
-        if (todayDate <= birthDate) {
-            return this.birthDate.getFullYear() - (new Date()).getFullYear();
+        if (nowDateOnly <= birthDateOnly) {
+            return (new Date(Date.now())).getFullYear() - this.birthDate.getFullYear();
         }
 
-        return this
+        return (new Date(Date.now())).getFullYear() - 1 - this.birthDate.getFullYear();
     }
 
     initialize(birthDate, nowDate) {
@@ -28,7 +28,7 @@ export default class BirthdayTimer {
         }
 
         if (!nowDate) {
-            nowDate = new Date();
+            nowDate = new Date(Date.now());
         }
 
         if (!birthDate) {

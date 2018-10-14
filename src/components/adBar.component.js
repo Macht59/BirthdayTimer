@@ -1,5 +1,5 @@
 import React from "react";
-import { View, AppRegistry } from "react-native";
+import { View, AppRegistry, Platform } from "react-native";
 import {
   AdMobBanner,
 } from 'expo';
@@ -7,12 +7,14 @@ import {
 export default class AdBar extends React.Component {
 
   render() {
+    const iOsUnitId = "ca-app-pub-7409231048157456/8013801446";
+    const androidUnitId = "ca-app-pub-7409231048157456/4292105638";
+
     return (
       <View>
         <AdMobBanner
           bannerSize="banner"
-          adUnitID="ca-app-pub-7409231048157456/4292105638"
-          testDeviceID="EMULATOR"
+          adUnitID={Platform.OS === "ios" ? iOsUnitId : androidUnitId}
           onDidFailToReceiveAdWithError={this.bannerError}
           style={{ alignSelf: "center" }}
         />
@@ -21,7 +23,7 @@ export default class AdBar extends React.Component {
   }
 
   bannerError(arg) {
-    console.warn("banner failed to load");
+    console.warn(`Banner failed to load. ${JSON.stringify(arg)}`);
   }
 
 }

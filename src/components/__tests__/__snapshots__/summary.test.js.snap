@@ -112,7 +112,17 @@ exports[`Summary component renders correctly 1`] = `
                 ]
               }
             >
-              Your birthday will be in:
+              You will be
+               
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+              >
+                0
+              </Text>
+               
+              years old in
             </Text>
             <Text
               accessible={true}
@@ -165,12 +175,11 @@ exports[`Summary component renders correctly 1`] = `
               }
             >
               <RNAdMob
-                adUnitID="ca-app-pub-7409231048157456/4292105638"
+                adUnitID="ca-app-pub-7409231048157456/8013801446"
                 bannerSize="banner"
                 onDidFailToReceiveAdWithError={[Function]}
                 onSizeChange={[Function]}
                 style={Object {}}
-                testDeviceID="EMULATOR"
               />
             </View>
           </View>

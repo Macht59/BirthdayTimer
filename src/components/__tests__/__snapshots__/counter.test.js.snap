@@ -36,7 +36,17 @@ exports[`Counter component renders correctly 1`] = `
       ]
     }
   >
-    Your birthday will be in:
+    You will be
+     
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      0
+    </Text>
+     
+    years old in
   </Text>
   <Text
     accessible={true}

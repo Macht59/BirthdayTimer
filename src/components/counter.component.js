@@ -5,10 +5,11 @@ import {
     StyleSheet,
     View,
     Dimensions,
+    Switch,
 } from 'react-native';
 import BirthdayTimer from '../common/BirthdayTimer';
 import { textStyles } from "../styles/textStyles";
-import { DangerZone } from 'expo';
+import { DangerZone, KeepAwake } from 'expo';
 import { localization } from './counter.localization';
 import resolveLocale from '../common/Localization';
 const { Localization } = DangerZone;
@@ -40,6 +41,18 @@ export default class Counter extends Component {
         this.state.timer.initialize(this.props.birthDate);
     }
 
+    onSwitchChange = (value) => {
+        if (value){
+            KeepAwake.activate();
+        } else {
+            KeepAwake.deactivate();
+        }
+        
+        this.setState({
+            doNotDim: value,
+        });
+    }
+
     updateRemainingTime() {
         this.setState(prevState => {
             prevState.timer.countdownDate.tick();
@@ -49,6 +62,25 @@ export default class Counter extends Component {
         });
     }
 
+    getYearsEnding() {
+        const lastDigit = this.state.timer.nextAge % 10;
+        switch (lastDigit) {
+            case 1:
+                return this.localeStore.yearOld;
+            case 2:
+            case 3:
+            case 4:
+                return this.localeStore.yearsOld1;
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 0:
+                return this.localeStore.yearsOld2;
+        }
+    }
+
     render() {
         const isInitialized = this.state.timer.countdownDate.isInitialized;
         return (<View style={styles.container}>
@@ -56,9 +88,8 @@ export default class Counter extends Component {
                 allowFontScaling={false}
                 style={[textStyles.text, textStyles.shadow, textStyles.screenHeader]}
             >
-                {this.localeStore.yourBirthdayWillBeIn}
+                {this.localeStore.yourBirthdayWillBe} <Text>{this.state.timer.nextAge}</Text> {this.getYearsEnding()}
             </Text>
-            <Text>{this.state.currentLocale}</Text>
             <View style={styles.circleContainer}>
                 <View style={styles.circle}>
                     {!isInitialized && <Text
@@ -85,6 +116,13 @@ export default class Counter extends Component {
                         {this.state.timer.countdownDate.seconds} {this.localeStore.seconds}
                     </Text>}
                 </View>
+            </View>
+            <View style={styles.switchContainer}>
+                <Switch
+                    onValueChange={this.onSwitchChange}
+                    value={this.state.doNotDim}
+                />
+                <Text style={styles.switchText}>{this.localeStore.doNotDim}</Text>
             </View>
         </View>);
     }
@@ -116,6 +154,18 @@ const styles = StyleSheet.create({
         color: "white",
         fontSize: 30,
         textAlign: "center",
+    },
+    switchText: {
+        color: "skyblue",
+        fontSize: 15,
+        paddingLeft: 15,
+    },
+    switchContainer: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignContent: "center",
+        alignItems: "center",
+        paddingBottom: 15,
     },
 });
 
