@@ -20,16 +20,14 @@
   },
   "jest": {
     "preset": "jest-expo",
-    "testResultsProcessor": "jest-jenkins-reporter"
-  },
-  "jestSonar": {
-    "reportPath": "reports",
-    "reportFile": "report.xml",
-    "indent": 4
+    "reporters": [
+      "default",
+      "jest-junit"
+    ]
   },
   "dependencies": {
     "expo": "^27.0.1",
-    "jest-jenkins-reporter": "^1.0.2",
+    "jest-junit": "^5.2.0",
     "react": "16.3.1",
     "react-native": "~0.55.2",
     "react-native-swiper": "^1.5.13"
