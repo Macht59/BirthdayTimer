@@ -3,17 +3,17 @@ pipeline {
   stages {
     stage('Install packages') {
       steps {
-        sh 'npm install'
+        bat 'npm install'
       }
     }
     stage('Run tests') {
       steps {
-        sh 'npm test --colors'
+        bat 'npm test'
       }
     }
     stage('Collect test results') {
       steps {
-        junit(testResults: 'reports/report.xml', allowEmptyResults: true)
+        junit(testResults: 'junit.xml', allowEmptyResults: true)
       }
     }
   }
