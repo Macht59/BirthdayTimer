@@ -9,45 +9,6 @@ exports[`Counter component renders correctly 1`] = `
     }
   }
 >
-  <Text
-    accessible={true}
-    allowFontScaling={false}
-    ellipsizeMode="tail"
-    style={
-      Array [
-        Object {
-          "color": "skyblue",
-          "fontSize": 30,
-          "textAlign": "center",
-        },
-        Object {
-          "textShadowColor": "rgba(255, 255, 255, 2)",
-          "textShadowOffset": Object {
-            "height": 1,
-            "width": 1,
-          },
-          "textShadowRadius": 20,
-        },
-        Object {
-          "paddingBottom": 25,
-          "paddingTop": 25,
-          "textAlign": "center",
-        },
-      ]
-    }
-  >
-    You will be
-     
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      0
-    </Text>
-     
-    years old in
-  </Text>
   <View
     style={
       Object {

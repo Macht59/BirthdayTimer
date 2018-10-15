@@ -84,12 +84,12 @@ export default class Counter extends Component {
     render() {
         const isInitialized = this.state.timer.countdownDate.isInitialized;
         return (<View style={styles.container}>
-            <Text
+            {isInitialized && <Text
                 allowFontScaling={false}
                 style={[textStyles.text, textStyles.shadow, textStyles.screenHeader]}
             >
                 {this.localeStore.yourBirthdayWillBe} <Text>{this.state.timer.nextAge}</Text> {this.getYearsEnding()}
-            </Text>
+            </Text>}
             <View style={styles.circleContainer}>
                 <View style={styles.circle}>
                     {!isInitialized && <Text

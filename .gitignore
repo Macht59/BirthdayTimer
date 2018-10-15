@@ -6,6 +6,9 @@
 # dependencies
 /node_modules
 
+# tests
+junit.xml
+
 # misc
 .env.local
 .env.development.local

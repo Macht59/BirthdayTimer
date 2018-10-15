@@ -35,6 +35,9 @@ export default class Settings extends React.Component {
 
     async componentDidMount() {
         const currentLocale = await Localization.getCurrentLocaleAsync();
+        this.setState({
+            currentLocale: currentLocale,
+        });
         const newLocale = resolveLocale(currentLocale);
         if (newLocale !== currentLocale) {
             this.localeStore.setLocale(newLocale);
@@ -65,6 +68,7 @@ export default class Settings extends React.Component {
                     onDateChange={this.iOsSetDate}
                     mode="date"
                     maximumDate={this.props.maximumAllowedDate}
+                    locale={this.state.currentLocale}
                 />
                 <Button onPress={this.iOsSaveDate} title={this.localeStore.saveBirthdate} />
             </View>
