@@ -8,12 +8,12 @@ pipeline {
     }
     stage('Run tests') {
       steps {
-        bat 'npm test --colors'
+        bat 'npm test'
       }
     }
     stage('Collect test results') {
       steps {
-        junit(testResults: 'reports/report.xml', allowEmptyResults: true)
+        junit(testResults: 'junit.xml', allowEmptyResults: true)
       }
     }
   }
