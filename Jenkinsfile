@@ -8,7 +8,7 @@ pipeline {
     }
     stage('Run tests') {
       steps {
-        bat 'npm test'
+        bat 'npm test --ci --reporters=default --reporters=jest-junit'
       }
     }
     stage('Collect test results') {
