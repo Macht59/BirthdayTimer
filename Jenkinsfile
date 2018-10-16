@@ -6,17 +6,13 @@ pipeline {
         bat 'npm install'
       }
     }
-    stage('Run tests') {
+    stage('Test') {
       steps {
         bat 'npm test --ci --reporters=default --reporters=jest-junit'
+        junit 'junit.xml'
       }
     }
-    stage('Collect test results') {
-      steps {
-        junit(testResults: 'junit.xml', allowEmptyResults: true)
-      }
-    }
-    stage('Build APK with expo') {
+    stage('Build APK') {
       steps {
         bat 'expo logout'
         bat 'expo build:Android'
