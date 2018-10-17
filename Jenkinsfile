@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Install packages') {
       steps {
-        bat 'npm install'
+        bat(script: 'npm install', returnStatus: true, returnStdout: true)
       }
     }
     stage('Test') {
@@ -21,11 +21,11 @@ pipeline {
     }
     stage('Download APK') {
       steps {
-        powershell ('''$ouputFilePath = Join-Path $PWD "expo-build-android-output.txt" 
+        powershell '''$ouputFilePath = Join-Path $PWD "expo-build-android-output.txt" 
         $text = [IO.File]::ReadAllText($ouputFilePath) 
         $text -match \'https:\\/\\/expo\\.io\\/artifacts\\/.+\' 
         $url = $Matches[0] 
-        Invoke-WebRequest -Uri $url -OutFile "BirthdayTimer.apk"''')
+        Invoke-WebRequest -Uri $url -OutFile "BirthdayTimer.apk"'''
       }
     }
   }
