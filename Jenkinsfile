@@ -16,7 +16,7 @@ pipeline {
       steps {
         bat 'expo logout'
         bat 'expo login -u %EXPO_CREDS_USR% -p %EXPO_CREDS_PSW%'
-        powershell 'Start-Process -FilePath expo -ArgumentList "ba --no-publish --no-wait" -NoNewWindow -Wait'
+        bat 'expo ba --no-publish --no-wait'
       }
     }
     stage('Download APK') {
