@@ -27,7 +27,7 @@ DO
     Write-Host "Checking build status..."
     $buildStatusOutput = expo build:status
     $buildStatusOutput = $buildStatusOutput -join '---'
-    $isMatch = $buildStatusOutput -match "\\[\d{2}:\d{2}:\d{2}\]\s###\s*0\s\|\sAndroid\s\|\shttps:\/\/expo.io\/builds\/[\w-]+\s###---\[\d{2}:\d{2}:\d{2}\]\sBuild\sfinished.---\[\d{2}:\d{2}:\d{2}\]\sAPK:\s(https:\/\/[\w-\.\/%]+\.apk)"
+    $isMatch = $buildStatusOutput -match "\\[\\d{2}:\\d{2}:\\d{2}\\]\\s###\\s*0\\s\\|\\sAndroid\\s\\|\\shttps:\\/\\/expo.io\\/builds\\/[\\w-]+\\s###---\\[\\d{2}:\\d{2}:\\d{2}\\]\\sBuild\\sfinished.---\\[\\d{2}:\\d{2}:\\d{2}\\]\\sAPK:\\s(https:\\/\\/[\\w-\\.\\/%]+\\.apk)"
     if ($isMatch){
         Write-Host "Build was completed. Starting APK download..."
     } else {
