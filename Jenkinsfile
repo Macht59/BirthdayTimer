@@ -16,7 +16,7 @@ pipeline {
       steps {
         bat 'expo logout'
         bat 'expo login -u %EXPO_CREDS_USR% -p %EXPO_CREDS_PSW%'
-        powershell 'Start-Process -FilePath exp -ArgumentList "build:android" -NoNewWindow -Wait -RedirectStandardOutput buildAndroidOutput.txt'
+        powershell 'Start-Process -FilePath expo -ArgumentList "build:android" -NoNewWindow -Wait -RedirectStandardOutput buildAndroidOutput.txt'
       }
     }
     stage('Download APK') {
