@@ -16,12 +16,16 @@ pipeline {
       steps {
         bat 'expo logout'
         bat 'expo login -u %EXPO_CREDS_USR% -p %EXPO_CREDS_PSW%'
-        powershell 'Start-Process -FilePath expo -ArgumentList "build:android" -NoNewWindow -Wait -RedirectStan dardOutput buildAndroidOutput.txt'
+        powershell 'Start-Process -FilePath expo -ArgumentList "build:android" -NoNewWindow -Wait -RedirectStandardOutput buildAndroidOutput.txt'
       }
     }
     stage('Download APK') {
       steps {
-        powershell '$ouputFilePath = Join-Path $PWD "buildAndroidOutput.txt"         $text = [IO.File]::ReadAllText($ouputFilePath)         $text -match \'https:\\/\\/expo\\.io\\/artifacts\\/.+\'         $url = $Matches[0]         Invoke-WebRequest -Uri $url -OutFile "BirthdayTimer.apk"'
+        powershell '''$ouputFilePath = Join-Path $PWD "buildAndroidOutput.txt"         
+        $text = [IO.File]::ReadAllText($ouputFilePath)         
+        $text -match \'https:\\/\\/expo\\.io\\/artifacts\\/.+\'         
+        $url = $Matches[0]         
+        Invoke-WebRequest -Uri $url -OutFile "BirthdayTimer.apk"'''
       }
     }
   }
