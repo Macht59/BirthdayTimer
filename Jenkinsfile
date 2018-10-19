@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Install packages') {
       steps {
-        bat(script: 'npm install', returnStatus: true, returnStdout: true)
+        bat(script: 'npm install', returnStdout: true)
       }
     }
     stage('Test') {
@@ -21,7 +21,7 @@ pipeline {
     }
     stage('Download APK') {
       steps {
-        def stdOut = powershell (returnStdout: true, script:'''
+        powershell (returnStdout: true, script:'''
           DO
           {
               Write-Output "Checking build status..."
@@ -39,7 +39,6 @@ pipeline {
           #Import-Module BitsTransfer
           #Start-BitsTransfer -Source $url -Destination "BirthdayTimer.apk"
           Write-Output "File download completed."''')
-        println stdout
       }
     }
   }
