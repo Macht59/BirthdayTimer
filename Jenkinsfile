@@ -25,17 +25,18 @@ pipeline {
               $bs = '\\\\';
               $successPattern = "$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)CUs###$($bs)s*0$($bs)s$($bs)|$($bs)sAndroid$($bs)s$($bs)|$($bs)shttps:$($bs)/$($bs)/expo.io$($bs)/builds$($bs)/[-$($bs)w]+$($bs)s###---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sBuild$($bs)sfinished.---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sAPK:$($bs)s(https:$($bs)/$($bs)/[-$($bs)w$($bs).$($bs)/%]+$($bs).apk)";
               $isMatch = $buildStatusOutput -match $successPattern;
+              Write-Information "buildStatusOutput after first match: $buildStatusOutput";
               if ($isMatch){
                   Write-Information "Build was completed. Starting APK download..."
               } else {
                   $errorPattern = "###$($bs)s*0$($bs)s$($bs)|$($bs)sAndroid$($bs)s$($bs)|$($bs)shttps:$($bs)/$($bs)/expo.io$($bs)/builds$($bs)/[-$($bs)w]+$($bs)s###---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sThere was an error with this build$($bs).";
                   $isError = $buildStatusOutput -match $errorPattern;
+                  Write-Information "buildStatusOutput after second match: $buildStatusOutput";
                   if ($isError){
                       Write-Error "Build has failed on EXPO server."
                       return;
                   } else {
-                    Write-Information "buildStatusOutput:";
-                    Write-Information $buildStatusOutput
+                    Write-Information "buildStatusOutput: $buildStatusOutput";
                     Write-Information "Build is still in process. Will check again in 30 seconds."
                     Start-Sleep -Seconds 30
                   }
