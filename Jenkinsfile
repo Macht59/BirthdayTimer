@@ -31,9 +31,10 @@ pipeline {
                   if ($isError){
                       Write-Error "Build has failed on EXPO server."
                       return;
+                  } else {
+                    Write-Information "Build is still in process. Will check again in 30 seconds."
+                    Start-Sleep -Seconds 30
                   }
-                  Write-Information "Build is still in process. Will check again in 30 seconds."
-                  Start-Sleep -Seconds 30
               }
           } While (!$isMatch)
           $url = $Matches[1]
