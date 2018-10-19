@@ -22,7 +22,7 @@ pipeline {
     stage('Download APK') {
       steps {
         powershell '''
-          Write-Output 'File download completed.'
+          Write-Output "File download completed."
         '''
       }
     }
