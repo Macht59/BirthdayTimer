@@ -36,8 +36,8 @@ DO
     }
 } While (!$isMatch)
 $url = $Matches[1]
-Import-Module BitsTransfer
-Start-BitsTransfer -Source $url -Destination "BirthdayTimer.apk"
+#Import-Module BitsTransfer
+#Start-BitsTransfer -Source $url -Destination "BirthdayTimer.apk"
 Write-Host "File download completed."''')
       }
     }
