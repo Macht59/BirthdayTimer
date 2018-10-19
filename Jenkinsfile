@@ -27,6 +27,11 @@ pipeline {
               if ($isMatch){
                   Write-Information "Build was completed. Starting APK download..."
               } else {
+                  $isError = $buildStatusOutput -match "\\[\\d{2}:\\d{2}:\\d{2}\\]\\s###\\s*0\\s\\|\\sAndroid\\s\\|\\shttps:\\/\\/expo.io\\/builds\\/[\\w-]+\\s###---\\[\\d{2}:\\d{2}:\\d{2}\\]\\sThere was an error with this build.---"
+                  if ($isError){
+                      Write-Error "Build has failed on EXPO server."
+                      return;
+                  }
                   Write-Information "Build is still in process. Will check again in 30 seconds."
                   Start-Sleep -Seconds 30
               }
