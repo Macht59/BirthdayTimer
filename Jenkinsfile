@@ -24,13 +24,13 @@ pipeline {
               $buildStatusInformation = expo build:status
               $buildStatusOutput = $buildStatusOutput -join \'---\'
               $bs = '\\';
-              $successPattern = "$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)CUs###$($bs)s*0$($bs)s$($bs)|$($bs)sAndroid$($bs)s$($bs)|$($bs)shttps:$($bs)/$($bs)/expo.io$($bs)/builds$($bs)/[$($bs)w-]+$($bs)s###---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sBuild$($bs)sfinished.---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sAPK:$($bs)s(https:$($bs)/$($bs)/[$($bs)w-$($bs).$($bs)/%]+$($bs).apk)"
+              $successPattern = @"$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)CUs###$($bs)s*0$($bs)s$($bs)|$($bs)sAndroid$($bs)s$($bs)|$($bs)shttps:$($bs)/$($bs)/expo.io$($bs)/builds$($bs)/[$($bs)w-]+$($bs)s###---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sBuild$($bs)sfinished.---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sAPK:$($bs)s(https:$($bs)/$($bs)/[$($bs)w-$($bs).$($bs)/%]+$($bs).apk)"
               Write-Information $successPattern
               $isMatch = $buildStatusOutput -match $successPattern
               if ($isMatch){
                   Write-Information "Build was completed. Starting APK download..."
               } else {
-                  $errorPattern = "###$($bs)s*0$($bs)s$($bs)|$($bs)sAndroid$($bs)s$($bs)|$($bs)shttps:$($bs)/$($bs)/expo.io$($bs)/builds$($bs)/[$($bs)w-]+$($bs)s###---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sThere was an error with this build$($bs)."
+                  $errorPattern = @"###$($bs)s*0$($bs)s$($bs)|$($bs)sAndroid$($bs)s$($bs)|$($bs)shttps:$($bs)/$($bs)/expo.io$($bs)/builds$($bs)/[$($bs)w-]+$($bs)s###---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sThere was an error with this build$($bs)."
                   Write-Information $errorPattern
                   $isError = $buildStatusOutput -match $errorPattern
                   if ($isError){
