@@ -21,9 +21,9 @@ pipeline {
     }
     stage('Download APK') {
       steps {
-        powershell script:'''
-          Write-Output "File download completed."
-          '''
+        powershell '''
+          Write-Output 'File download completed.'
+        '''
       }
     }
   }
