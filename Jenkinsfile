@@ -21,7 +21,7 @@ pipeline {
     }
     stage('Download APK') {
       steps {
-        powershell '''
+        powershell ('''
 DO
 {
     Write-Host "Checking build status..."
@@ -38,7 +38,7 @@ DO
 $url = $Matches[1]
 Import-Module BitsTransfer
 Start-BitsTransfer -Source $url -Destination "BirthdayTimer.apk"
-Write-Host "File download completed."'''
+Write-Host "File download completed."''', returnStatus: true, returnStdout: true)
       }
     }
   }
