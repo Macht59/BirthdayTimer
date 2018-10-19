@@ -22,8 +22,8 @@ pipeline {
     stage('Download APK') {
       steps {
         powershell (returnStdout: true, script:'''
-          DO
-          {
+          #DO
+          #{
               Write-Output "Checking build status..."
               $buildStatusOutput = expo build:status
               $buildStatusOutput = $buildStatusOutput -join '---'
@@ -34,7 +34,7 @@ pipeline {
                   Write-Output "Build is still in process. Will check again in 30 seconds."
                   Start-Sleep -Seconds 30
               }
-          } While (!$isMatch)
+          #} While (!$isMatch)
           $url = $Matches[1]
           #Import-Module BitsTransfer
           #Start-BitsTransfer -Source $url -Destination "BirthdayTimer.apk"
