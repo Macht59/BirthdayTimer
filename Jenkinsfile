@@ -16,17 +16,16 @@ pipeline {
       steps {
         bat 'expo logout'
         bat 'expo login -u %EXPO_CREDS_USR% -p %EXPO_CREDS_PSW%'
-        
       }
     }
     stage('Download APK') {
       steps {
-        powershell (returnStdout: true, script:'''
+        powershell(returnStdout: true, script: '''
           DO
           {
               Write-Output "Checking build status..."
               $buildStatusOutput = expo build:status
-              $buildStatusOutput = $buildStatusOutput -join '---'
+              $buildStatusOutput = $buildStatusOutput -join \'---\'
               $isMatch = $buildStatusOutput -match "\\[\\d{2}:\\d{2}:\\d{2}\\]\\s###\\s*0\\s\\|\\sAndroid\\s\\|\\shttps:\\/\\/expo.io\\/builds\\/[\\w-]+\\s###---\\[\\d{2}:\\d{2}:\\d{2}\\]\\sBuild\\sfinished.---\\[\\d{2}:\\d{2}:\\d{2}\\]\\sAPK:\\s(https:\\/\\/[\\w-\\.\\/%]+\\.apk)"
               if ($isMatch){
                   Write-Output "Build was completed. Starting APK download..."
@@ -39,6 +38,7 @@ pipeline {
           Import-Module BitsTransfer
           Start-BitsTransfer -Source $url -Destination "BirthdayTimer.apk"
           Write-Output "File download completed."''')
+        archiveArtifacts 'BirthdayTimer.apk'
       }
     }
   }
