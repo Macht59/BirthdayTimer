@@ -16,7 +16,7 @@ pipeline {
       steps {
         bat 'expo logout'
         bat 'expo login -u %EXPO_CREDS_USR% -p %EXPO_CREDS_PSW%'
-        bat 'expo ba --no-publish --no-wait'
+        bat '#expo ba --no-publish --no-wait'
       }
     }
     stage('Download APK') {
