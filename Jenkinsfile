@@ -23,11 +23,12 @@ pipeline {
               Write-Information "Checking build status..."
               $buildStatusInformation = expo build:status
               $buildStatusOutput = $buildStatusOutput -join \'---\'
-              $isMatch = $buildStatusOutput -match "\[\d{2}:\d{2}:\d{2}\]\s###\s*0\s\|\sAndroid\s\|\shttps:\/\/expo.io\/builds\/[\w-]+\s###---\[\d{2}:\d{2}:\d{2}\]\sBuild\sfinished.---\[\d{2}:\d{2}:\d{2}\]\sAPK:\s(https:\/\/[\w-\.\/%]+\.apk)"
+              $bs = '\';
+              $isMatch = $buildStatusOutput -match "$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)s###$($bs)s*0$($bs)s$($bs)|$($bs)sAndroid$($bs)s$($bs)|$($bs)shttps:$($bs)/$($bs)/expo.io$($bs)/builds$($bs)/[$($bs)w-]+$($bs)s###---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sBuild$($bs)sfinished.---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sAPK:$($bs)s(https:$($bs)/$($bs)/[$($bs)w-$($bs).$($bs)/%]+$($bs).apk)"
               if ($isMatch){
                   Write-Information "Build was completed. Starting APK download..."
               } else {
-                  $isError = $buildStatusOutput -match "###\s*0\s\|\sAndroid\s\|\shttps:\/\/expo.io\/builds\/[\w-]+\s###---\[\d{2}:\d{2}:\d{2}\]\sThere was an error with this build\."
+                  $isError = $buildStatusOutput -match "###$($bs)s*0$($bs)s$($bs)|$($bs)sAndroid$($bs)s$($bs)|$($bs)shttps:$($bs)/$($bs)/expo.io$($bs)/builds$($bs)/[$($bs)w-]+$($bs)s###---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sThere was an error with this build$($bs)."
                   if ($isError){
                       Write-Error "Build has failed on EXPO server."
                       return;
