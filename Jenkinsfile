@@ -15,11 +15,11 @@ pipeline {
     stage('Prepare files'){
       steps{
         powershell '''
-          $appJson = Get-Content .\app.json 
-          $matchingRow = $appJson -match '"versionCode":\s(\d+),'
+          $appJson = Get-Content .\\app.json 
+          $matchingRow = $appJson -match '"versionCode":\\s(\\d+),'
           $matchingRowIndex = $appJson.IndexOf($matchingRow)
           $versionCodeRow = $appJson[$matchingRowIndex]
-          if (!($versionCodeRow -match "\d+")){
+          if (!($versionCodeRow -match "\\d+")){
               throw "Unable to find version code";
           }
           $versionCode = $Matches[0];
@@ -28,7 +28,7 @@ pipeline {
 
           $appJson[$matchingRowIndex] = $versionCodeRow -replace $Matches[0], $versionCodeInt
 
-          Set-Content -Path .\app.json -Value $appJson
+          Set-Content -Path .\\app.json -Value $appJson
 
           Write-Information "versionCode updated to $versionCodeInt"
         '''
