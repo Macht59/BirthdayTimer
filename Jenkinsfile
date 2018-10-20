@@ -10,7 +10,8 @@ pipeline {
         }
         stage('Prepare files') {
           steps {
-            powershell powershell(returnStdout: true, script: '''
+             echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+             powershell(returnStdout: true, script: '''
               $appJson = Get-Content .\\app.json 
               $matchingRow = $appJson -match \'"versionCode":\\s(\\d+),\'
               $matchingRowIndex = $appJson.IndexOf($matchingRow)
