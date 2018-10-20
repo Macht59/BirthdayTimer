@@ -8,9 +8,27 @@ pipeline {
             bat 'npm install'
           }
         }
-        stage('Prepare Files2') {
+        stage('Prepare files') {
           steps {
-            writeFile(file: '123', text: '456')
+            powershell powershell(returnStdout: true, script: '''
+              $appJson = Get-Content .\\app.json 
+              $matchingRow = $appJson -match \'"versionCode":\\s(\\d+),\'
+              $matchingRowIndex = $appJson.IndexOf($matchingRow)
+              $versionCodeRow = $appJson[$matchingRowIndex]
+              if (!($versionCodeRow -match "\\d+")){
+                  throw "Unable to find version code";
+              }
+
+              $appJson[$matchingRowIndex] = $versionCodeRow -replace $Matches[0], "$($env.BUILD_ID)"
+
+              Set-Content -Path .\\app.json -Value $appJson
+
+              Write-Information "versionCode updated to $($env.BUILD_ID)"
+
+              if ($env.BUILD_ID -eq ''){
+                throw "BUILD_ID is empty!";
+              }
+            ''')
           }
         }
       }
@@ -19,25 +37,6 @@ pipeline {
       steps {
         bat 'npm test --ci --reporters=default --reporters=jest-junit'
         junit 'junit.xml'
-      }
-    }
-    stage('Prepare files') {
-      steps {
-        powershell powershell(returnStdout: true, script: '''
-          $appJson = Get-Content .\\app.json 
-          $matchingRow = $appJson -match \'"versionCode":\\s(\\d+),\'
-          $matchingRowIndex = $appJson.IndexOf($matchingRow)
-          $versionCodeRow = $appJson[$matchingRowIndex]
-          if (!($versionCodeRow -match "\\d+")){
-              throw "Unable to find version code";
-          }
-
-          $appJson[$matchingRowIndex] = $versionCodeRow -replace $Matches[0], "$($env.BUILD_ID)"
-
-          Set-Content -Path .\\app.json -Value $appJson
-
-          Write-Information "versionCode updated to $($env.BUILD_ID)"
-        ''')
       }
     }
     stage('Build') {
