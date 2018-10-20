@@ -16,31 +16,46 @@ pipeline {
       steps {
         bat 'expo logout'
         bat 'expo login -u %EXPO_CREDS_USR% -p %EXPO_CREDS_PSW%'
+        bat 'expo ba --no-publish --no-wait'
         powershell(returnStdout: true, script: '''
           DO
           {
-              Write-Information "Checking build status...";
-              $buildStatusOutput = expo build:status;
-              $buildStatusOutput = $buildStatusOutput -join \'---\';
-              Write-Information "buildStatusOutput = $buildStatusOutput"
-              $bs = '\\\\';
-              $successPattern = "$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)CUs###$($bs)s*0$($bs)s$($bs)|$($bs)sAndroid$($bs)s$($bs)|$($bs)shttps:$($bs)/$($bs)/expo.io$($bs)/builds$($bs)/[-$($bs)w]+$($bs)s###---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sBuild$($bs)sfinished.---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sAPK:$($bs)s(https:$($bs)/$($bs)/[-$($bs)w$($bs).$($bs)/%]+$($bs).apk)";
-              $isMatch = $buildStatusOutput -match $successPattern;
-              if ($isMatch){
-                  Write-Information "Build was completed. Starting APK download..."
-              } else {
-                  $errorPattern = "###$($bs)s*0$($bs)s$($bs)|$($bs)sAndroid$($bs)s$($bs)|$($bs)shttps:$($bs)/$($bs)/expo.io$($bs)/builds$($bs)/[-$($bs)w]+$($bs)s###---$($bs)[$($bs)d{2}:$($bs)d{2}:$($bs)d{2}$($bs)]$($bs)sThere was an error with this build$($bs).";
-                  $isError = $buildStatusOutput -match $errorPattern;
-                  if ($isError){
-                      Write-Error "Build has failed on EXPO server."
-                      return;
-                  } else {
-                    Write-Information "Build is still in process. Will check again in 30 seconds."
-                    Start-Sleep -Seconds 30
-                  }
+              Write-Host "Checking build status..."
+              $buildStatusOutput = expo build:status
+              if ($buildStatusOutput.Length -le 7){
+                  Write-Error "Unable to get build status."
+                  return;
               }
-          } While (!$isMatch)
-          $url = $Matches[1]
+
+              $statusLine = $buildStatusOutput[7];
+
+              if ($statusLine -match "There was an error with this build"){
+                  Write-Error "Build has failed on EXPO server."
+                  return;
+              }
+
+              if ($statusLine -match "queue"){
+                  Write-Information "The build is in queue. Will check again in 1 minute"
+                  Start-Sleep -Seconds 60
+              }
+
+              if ($statusLine -match "Build in progress"){
+                  Write-Information "The build is in process. Will check again in 1 minute"
+                  Start-Sleep -Seconds 60
+              }
+              
+              $isFinished = $statusLine -match "Build finished";
+              if ($isFinished){
+                  Write-Information "Build was completed."
+                  $buildStatusOutput[8] -match "https:.+apk"
+              } else {
+                  Write-Error "Unknown build status."
+              }
+
+          } While (!$isFinished)
+
+          Write-Information "File download starting..."
+          $url = $Matches[0]
           Import-Module BitsTransfer
           Start-BitsTransfer -Source $url -Destination "BirthdayTimer.apk"
           Write-Information "File download completed."''')
