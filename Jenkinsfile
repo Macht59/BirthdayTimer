@@ -9,9 +9,6 @@ pipeline {
           }
         }
         stage('Prepare files') {
-          environment { 
-              BUILD_NUMBER = "${env.BUILD_ID}"
-          }
           steps {
              powershell(returnStdout: true, script: '''
               $appJson = Get-Content .\\app.json 
@@ -22,11 +19,11 @@ pipeline {
                   throw "Unable to find version code";
               }
 
-              $appJson[$matchingRowIndex] = $versionCodeRow -replace $Matches[0], "$($env.BUILD_NUMBER)"
+              $appJson[$matchingRowIndex] = $versionCodeRow -replace $Matches[0], "$($env:BUILD_NUMBER)"
 
               Set-Content -Path .\\app.json -Value $appJson
 
-              Write-Information "versionCode updated to $($env.BUILD_NUMBER), path = $($env.Path)"
+              Write-Information "versionCode updated to $($env:BUILD_NUMBER)"
             ''')
           }
         }
