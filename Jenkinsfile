@@ -12,6 +12,25 @@ pipeline {
         junit 'junit.xml'
       }
     }
+    stage('Prepare files'){
+      steps{
+        powershell '''
+          $appJson = Get-Content .\\app.json 
+          $matchingRow = $appJson -match '"versionCode":\\s(\\d+),'
+          $matchingRowIndex = $appJson.IndexOf($matchingRow)
+          $versionCodeRow = $appJson[$matchingRowIndex]
+          if (!($versionCodeRow -match "\\d+")){
+              throw "Unable to find version code";
+          }
+          $versionCode = $Matches[0];
+          ([int]$versionCode)++
+
+          $appJson[$matchingRowIndex] = $versionCodeRow -replace $Matches[0], $versionCode
+
+          Set-Content -Path .\\app.json -Value $appJson
+        '''
+      }
+    }
     stage('Build') {
       steps {
         bat 'expo logout'
