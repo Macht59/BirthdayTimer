@@ -29,22 +29,22 @@ pipeline {
 
               $statusLine = $buildStatusOutput[7];
 
-              if ($statusLine -match "There was an error with this build"){
+              if ($statusLine -like "*There was an error with this build*"){
                   Write-Error "Build has failed on EXPO server."
                   return;
               }
 
-              if ($statusLine -match "queue"){
+              if ($statusLine -like "*queue*"){
                   Write-Information "The build is in queue. Will check again in 1 minute"
                   Start-Sleep -Seconds 60
               }
 
-              if ($statusLine -match "Build in progress"){
+              if ($statusLine -like "*Build in progress*"){
                   Write-Information "The build is in process. Will check again in 1 minute"
                   Start-Sleep -Seconds 60
               }
               
-              $isFinished = $statusLine -match "Build finished";
+              $isFinished = $statusLine -like "*Build finished*";
               if ($isFinished){
                   Write-Information "Build was completed."
                   $buildStatusOutput[8] -match "https:.+apk"
