@@ -22,20 +22,13 @@ pipeline {
           if (!($versionCodeRow -match "\\d+")){
               throw "Unable to find version code";
           }
-          $versionCode = $Matches[0];
-          $versionCodeInt = [int]$versionCode
-          $versionCodeInt = $versionCodeInt + 1
 
-          $appJson[$matchingRowIndex] = $versionCodeRow -replace $Matches[0], $versionCodeInt
+          $appJson[$matchingRowIndex] = $versionCodeRow -replace $Matches[0], $env.BUILD_NUMBER
 
           Set-Content -Path .\\app.json -Value $appJson
 
           Write-Information "versionCode updated to $versionCodeInt"
         '''
-        powershell 'git config --global user.email "macht59@gmail.com"'
-        powershell 'git config --global user.name "Igor Starodynov"'
-        powershell 'git commit -m "versionCode updated" .\\app.json'
-        powershell 'git push --set-upstream origin master'
       }
     }
     stage('Build') {
