@@ -23,11 +23,11 @@ pipeline {
                   throw "Unable to find version code";
               }
 
-              $appJson[$matchingRowIndex] = $versionCodeRow -replace $Matches[0], "$env.BUILD_ID"
+              $appJson[$matchingRowIndex] = $versionCodeRow -replace $Matches[0], "$($env.BUILD_ID)"
 
               Set-Content -Path .\\app.json -Value $appJson
 
-              Write-Information "versionCode updated to $env.BUILD_ID"
+              Write-Information "versionCode updated to $($env.BUILD_ID)"
             ''')
           }
         }
