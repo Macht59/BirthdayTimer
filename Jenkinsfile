@@ -3,8 +3,7 @@ pipeline {
   stages {
     stage('Install packages') {
       steps {
-        stdout = bat(script: 'npm install', returnStdout: true)
-        println(stdout)
+        bat 'npm install'
       }
     }
     stage('Test') {
