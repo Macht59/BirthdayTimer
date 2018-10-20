@@ -9,6 +9,9 @@ pipeline {
           }
         }
         stage('Prepare files') {
+          environment { 
+              BUILD_ID = "${env.BUILD_ID}"
+          }
           steps {
              echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
              powershell(returnStdout: true, script: '''
@@ -20,11 +23,11 @@ pipeline {
                   throw "Unable to find version code";
               }
 
-              $appJson[$matchingRowIndex] = $versionCodeRow -replace $Matches[0], "${env.BUILD_ID}"
+              $appJson[$matchingRowIndex] = $versionCodeRow -replace $Matches[0], "$env.BUILD_ID"
 
               Set-Content -Path .\\app.json -Value $appJson
 
-              Write-Information "versionCode updated to ${env.BUILD_ID}"
+              Write-Information "versionCode updated to $env.BUILD_ID"
             ''')
           }
         }
