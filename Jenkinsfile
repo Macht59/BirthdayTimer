@@ -37,11 +37,13 @@ pipeline {
               if ($statusLine -like "*queue*"){
                   Write-Information "The build is in queue. Will check again in 1 minute"
                   Start-Sleep -Seconds 60
+                  continue
               }
 
               if ($statusLine -like "*Build in progress*"){
                   Write-Information "The build is in process. Will check again in 1 minute"
                   Start-Sleep -Seconds 60
+                  continue
               }
               
               $isFinished = $statusLine -like "*Build finished*";
