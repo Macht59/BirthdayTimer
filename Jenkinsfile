@@ -2,8 +2,17 @@ pipeline {
   agent any
   stages {
     stage('Install packages') {
-      steps {
-        bat 'npm install'
+      parallel {
+        stage('Install packages') {
+          steps {
+            bat 'npm install'
+          }
+        }
+        stage('Prepare Files2') {
+          steps {
+            writeFile(file: '123', text: '456')
+          }
+        }
       }
     }
     stage('Test') {
@@ -12,11 +21,11 @@ pipeline {
         junit 'junit.xml'
       }
     }
-    stage('Prepare files'){
-      steps{
+    stage('Prepare files') {
+      steps {
         powershell powershell(returnStdout: true, script: '''
           $appJson = Get-Content .\\app.json 
-          $matchingRow = $appJson -match '"versionCode":\\s(\\d+),'
+          $matchingRow = $appJson -match \'"versionCode":\\s(\\d+),\'
           $matchingRowIndex = $appJson.IndexOf($matchingRow)
           $versionCodeRow = $appJson[$matchingRowIndex]
           if (!($versionCodeRow -match "\\d+")){
