@@ -51,7 +51,7 @@ pipeline {
                   Write-Information "Build was completed."
                   $buildStatusOutput[8] -match "https:.+apk"
               } else {
-                  Write-Error "Unknown build status."
+                  Write-Error "Unknown build status: $statusLine"
               }
 
           } While (!$isFinished)
