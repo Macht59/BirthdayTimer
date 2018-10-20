@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Prepare files'){
       steps{
-        powershell '''
+        powershell powershell(returnStdout: true, script: '''
           $appJson = Get-Content .\\app.json 
           $matchingRow = $appJson -match '"versionCode":\\s(\\d+),'
           $matchingRowIndex = $appJson.IndexOf($matchingRow)
@@ -28,7 +28,7 @@ pipeline {
           Set-Content -Path .\\app.json -Value $appJson
 
           Write-Information "versionCode updated to $($env.BUILD_ID)"
-        '''
+        ''')
       }
     }
     stage('Build') {
@@ -42,15 +42,13 @@ pipeline {
               Write-Host "Checking build status..."
               $buildStatusOutput = expo build:status
               if ($buildStatusOutput.Length -le 7){
-                  Write-Error "Unable to get build status."
-                  return;
+                  throw "Unable to get build status."
               }
 
               $statusLine = $buildStatusOutput[7];
 
               if ($statusLine -like "*There was an error with this build*"){
-                  Write-Error "Build has failed on EXPO server."
-                  return;
+                  throw "Build has failed on EXPO server."
               }
 
               if ($statusLine -like "*queue*"){
@@ -70,7 +68,7 @@ pipeline {
                   Write-Information "Build was completed."
                   $buildStatusOutput[8] -match "https:.+apk"
               } else {
-                  Write-Error "Unknown build status: $statusLine"
+                  throw "Unknown build status: $statusLine"
               }
 
           } While (!$isFinished)
