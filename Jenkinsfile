@@ -32,6 +32,8 @@ pipeline {
 
           Write-Information "versionCode updated to $versionCodeInt"
         '''
+        powershell 'git config --global user.email "macht59@gmail.com"'
+        powershell 'git config --global user.name "Igor Starodynov"'
         powershell 'git commit -m "versionCode updated" .\\app.json'
         powershell 'git push'
       }
