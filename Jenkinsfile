@@ -32,6 +32,8 @@ pipeline {
 
           Write-Information "versionCode updated to $versionCodeInt"
         '''
+        powershell 'git commit -m "versionCode updated" .\\app.json'
+        powershell 'git push'
       }
     }
     stage('Build') {
