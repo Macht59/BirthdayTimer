@@ -40,7 +40,7 @@ pipeline {
         stage('Publish to Expo') {
           steps {
             powershell(script: 'Start-Process expo -ArgumentList "publish"', returnStdout: true)
-            powershell 'Start-Sleep -Minutes 5'
+            powershell 'Start-Sleep -Seconds 300'
           }
         }
       }
