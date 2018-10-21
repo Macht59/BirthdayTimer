@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Prepare files') {
           steps {
-             powershell(returnStdout: true, script: '''
+            powershell(returnStdout: true, script: '''
               $appJson = Get-Content .\\app.json 
               $matchingRow = $appJson -match \'"versionCode":\\s(\\d+),\'
               $matchingRowIndex = $appJson.IndexOf($matchingRow)
@@ -83,16 +83,6 @@ pipeline {
           Start-BitsTransfer -Source $url -Destination "BirthdayTimer.apk"
           Write-Information "File download completed."''')
         archiveArtifacts 'BirthdayTimer.apk'
-      }
-    }
-    stage('Publish to Play Market') {
-      steps {
-        androidApkUpload googleCredentialsId: 'api-5930846181916082289-581086-a022434a4de4', apkFilesPattern: 'BirthdayTimer.apk', trackName: 'alpha',
-          recentChangeList: [
-            [language: 'en-US', text: "Minor bugs fixed."],
-            [language: 'ru-RU', text: "Исправлены мелкие ошибки."], 
-            [language: 'uk', text: "Виправлено дрібні помилки."]
-          ]
       }
     }
   }
