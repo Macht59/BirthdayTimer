@@ -1,14 +1,14 @@
 pipeline {
   agent any
   stages {
-    stage('Install packages') {
+    stage('Install packages and prepare files') {
       parallel {
         stage('Install packages') {
           steps {
             bat 'npm install'
           }
         }
-        stage('Prepare files') {
+        stage('Upgrade version code') {
           steps {
             powershell(returnStdout: true, script: '''
               $appJson = Get-Content .\\app.json 
@@ -29,7 +29,7 @@ pipeline {
         }
       }
     }
-    stage('Test') {
+    stage('Test & publish to Expo') {
       parallel {
         stage('Test') {
           steps {
@@ -40,6 +40,7 @@ pipeline {
         stage('Publish to Expo') {
           steps {
             powershell(script: 'Start-Process expo -ArgumentList "publish"', returnStdout: true)
+            powershell 'Start-Sleep -Minutes 5'
           }
         }
       }
