@@ -85,14 +85,17 @@ pipeline {
         archiveArtifacts 'BirthdayTimer.apk'
       }
     }
-    stage('Publish to Play Market'){
-      setps{
-        androidApkUpload googleCredentialsId: 'api-5930846181916082289-581086-a022434a4de4', apkFilesPattern: 'BirthdayTimer.apk', trackName: 'alpha',
-                recentChangeList: [
-                  [language: 'en-US', text: "Minor bugs fixe."],
-                  [language: 'ru-RU', text: "Исправлены мелкие ошибки."], 
-                  [language: 'uk', text: "Виправлено дрібні помилки."]
-                ]
+    stage('Publish to Play Market') {
+      steps {
+        androidApkUpload 
+          googleCredentialsId: 'api-5930846181916082289-581086-a022434a4de4', 
+          apkFilesPattern: 'BirthdayTimer.apk', 
+          trackName: 'alpha',
+          recentChangeList: [
+            [language: 'en-US', text: "Minor bugs fixed."],
+            [language: 'ru-RU', text: "Исправлены мелкие ошибки."], 
+            [language: 'uk', text: "Виправлено дрібні помилки."]
+          ]
       }
     }
   }
