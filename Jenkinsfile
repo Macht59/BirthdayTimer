@@ -30,9 +30,18 @@ pipeline {
       }
     }
     stage('Test') {
-      steps {
-        bat 'npm test --ci --reporters=default --reporters=jest-junit'
-        junit 'junit.xml'
+      parallel {
+        stage('Test') {
+          steps {
+            bat 'npm test --ci --reporters=default --reporters=jest-junit'
+            junit 'junit.xml'
+          }
+        }
+        stage('Publish to Expo') {
+          steps {
+            powershell(script: 'Start-Process expo -ArgumentList "publish"', returnStdout: true)
+          }
+        }
       }
     }
     stage('Build') {
